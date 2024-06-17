@@ -1,10 +1,13 @@
-const { City } = require('../models/index');
+const { CityRepository } = require('../repository/index');
 
-class CityRepository {
+class cityService {
+    constructor() {
+        this.cityRepository = new CityRepository();
+    }
 
-    async createCity({ name }) {
+    async createCity(data) {
         try {
-            const city = await City.create({ name });
+            const city = await this.cityRepository.createCity(data);
             return city;
         } catch (error) {
             console.log('Something went wrong in repository layer.');
@@ -12,14 +15,10 @@ class CityRepository {
         }
     }
 
-    async deleteCity({ cityId }) {
+    async deleteCity( cityId ) {
         try {
-            await City.destroy({
-                where: {
-                    id: cityId
-                }
-            });
-            return true;
+            const response = await this.cityRepository.deleteCity(cityId);
+            return response;
         } catch (error) {
             console.log('Something went wrong in repository layer.');
             throw {error};
@@ -28,11 +27,8 @@ class CityRepository {
 
     async updateCity(cityId, data) {
         try {
-            const city = await City.update(data, {
-                where: {
-                    id: cityId
-                }
-            });
+            const city = await this.cityRepository.updateCity(cityId, data);
+            return city;
         } catch (error) {
             console.log('Something went wrong in repository layer.');
             throw {error};
@@ -41,7 +37,7 @@ class CityRepository {
 
     async getCity(cityId) {
         try {
-            const city = await City.findByPK(cityId);
+            const city = await this.cityRepository.getCity(cityId);
             return city;
         } catch (error) {
             console.log('Something went wrong in repository layer.');
@@ -49,5 +45,3 @@ class CityRepository {
         }
     }
 }
-
-module.exports = CityRepository;
