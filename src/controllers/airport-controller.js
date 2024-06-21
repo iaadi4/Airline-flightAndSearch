@@ -25,7 +25,7 @@ const create = async (req, res) => {
 const destroy = async (req, res) => {
     try {
         const airport = await airportServices.deleteAirport(req.params.id);
-        return res.status(201).json({
+        return res.status(200).json({
             data: airport,
             success: true,
             message: 'Successfully deleted the airport',
@@ -45,7 +45,7 @@ const destroy = async (req, res) => {
 const get = async (req, res) => {
     try {
         const airport = await airportServices.getAirport(req.params.id);
-        return res.status(201).json({
+        return res.status(200).json({
             data: airport,
             success: true,
             message: 'Successfully fetched the airport',
@@ -65,7 +65,7 @@ const get = async (req, res) => {
 const update = async (req, res) => {
     try {
         const airport = await airportServices.createAirport(req.params.id, req.body);
-        return res.status(201).json({
+        return res.status(200).json({
             data: airport,
             success: true,
             message: 'Successfully patched the airport',
