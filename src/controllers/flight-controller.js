@@ -1,4 +1,5 @@
 const { FlightService } = require('../services/index');
+const { compareTime } = require('../utils/helper');
 
 const flightService = new FlightService();
 
