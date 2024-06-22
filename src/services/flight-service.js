@@ -20,6 +20,16 @@ class FlightService {
             throw {error};
         }
     }
+
+    async getAllFlight(filter) {
+        try {
+            const flight = await this.flightRepository.getAllFlight(filter);
+            return flight;
+        } catch (error) {
+            console.log('Something wrong in the repository layer.');
+            throw {error};
+        }
+    }
 }
 
 module.exports = FlightService;
